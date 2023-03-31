@@ -1,0 +1,3 @@
+name: HungerGames
+version: '${project.version}'
+main: mccc.gamemode.hungergames.HungerGames
