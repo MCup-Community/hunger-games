@@ -19,9 +19,9 @@ public final class HungerGames extends JavaPlugin {
 
         stageManager = new StageManager(this);
 
+        saveDefaultConfig();
+
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
-
-
     }
 
     @Override

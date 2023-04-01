@@ -9,7 +9,7 @@ public class GamemodeStage {
 
   public void load() {
     GamemodeStage instance = this;
-    timer.scheduleAtFixedRate(new TimerTask() {
+    tickTimer.scheduleAtFixedRate(new TimerTask() {
       public void run() {
         tick();
       }
@@ -17,7 +17,7 @@ public class GamemodeStage {
   }
 
   public void unload() {
-    timer.cancel();
+    tickTimer.cancel();
   }
 
   public void tick() {
@@ -36,9 +36,9 @@ public class GamemodeStage {
   public boolean endCondition() {
     return false;
   }
-  private final HungerGames plugin;
+  protected final HungerGames plugin;
 
-  private Timer timer = new Timer();
+  private final Timer tickTimer = new Timer();
 
   public GamemodeStage(HungerGames plugin_) {
     plugin = plugin_;
