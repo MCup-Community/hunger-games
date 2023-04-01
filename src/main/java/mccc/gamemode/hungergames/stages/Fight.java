@@ -4,6 +4,7 @@ import mccc.core.local.data.Team;
 import mccc.gamemode.hungergames.GamemodeStage;
 import mccc.gamemode.hungergames.HungerGames;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import java.util.LinkedHashMap;
@@ -14,6 +15,8 @@ public class Fight extends GamemodeStage {
   public void load() {
     super.load();
     // TODO: Chest loot randomization
+
+    plugin.core.apiManager.playerManager.setGlobalGamemode(GameMode.SURVIVAL);
 
     for (Player player : Bukkit.getOnlinePlayers()) {
       Team playerTeam = plugin.core.apiManager.teamManager.getTeamByPlayer(player.getName());

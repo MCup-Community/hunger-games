@@ -1,6 +1,9 @@
 package mccc.gamemode.hungergames;
 
 import mccc.gamemode.hungergames.events.GamemodeStageEndEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -8,12 +11,11 @@ import java.util.TimerTask;
 public class GamemodeStage {
 
   public void load() {
-    GamemodeStage instance = this;
-    tickTimer.scheduleAtFixedRate(new TimerTask() {
+    tickTimer = new BukkitRunnable() {
       public void run() {
         tick();
       }
-    }, 0, 50);
+    }.runTaskTimer(plugin, 0, 1);
   }
 
   public void unload() {
@@ -33,12 +35,13 @@ public class GamemodeStage {
 
   public int timeElapsed = 0;
 
+  public BukkitTask tickTimer;
+
   public boolean endCondition() {
     return false;
   }
   protected final HungerGames plugin;
 
-  private final Timer tickTimer = new Timer();
 
   public GamemodeStage(HungerGames plugin_) {
     plugin = plugin_;

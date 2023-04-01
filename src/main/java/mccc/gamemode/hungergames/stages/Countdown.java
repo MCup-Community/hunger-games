@@ -39,10 +39,7 @@ public class Countdown extends GamemodeStage {
   @Override
   public void load() {
     super.load();
-    System.out.println("FFUUUCK");
   }
-
-  public int timeLimit = 200;
 
   // The number displayed on screen
   public int secondsRemaining = -1;
@@ -50,5 +47,6 @@ public class Countdown extends GamemodeStage {
 
   public Countdown(HungerGames plugin_) {
     super(plugin_);
+    super.timeLimit = 200;
   }
 }
