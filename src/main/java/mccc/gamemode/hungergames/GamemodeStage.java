@@ -11,9 +11,11 @@ public class GamemodeStage {
     timer.scheduleAtFixedRate(new TimerTask() {
       @Override
       public void run() {
-        if (endCondition() || (timeLimit != -1 && timeElapsed > timeLimit)) {
+        if (endCondition() || (timeLimit != -1 && timeElapsed >= timeLimit)) {
           plugin.getServer().getPluginManager().callEvent(new GamemodeStageEndEvent(instance));
         }
+
+        timeElapsed++;
       }
     }, 0, 50);
   }

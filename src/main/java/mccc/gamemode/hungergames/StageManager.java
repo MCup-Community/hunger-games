@@ -12,6 +12,8 @@ public class StageManager {
   public void switchToNextStage() {
     stages.get(currentStageIndex).unload();
 
+
+
     currentStageIndex++;
 
     stages.get(currentStageIndex).load();
