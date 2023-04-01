@@ -6,16 +6,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GamemodeStage {
+
   public void load() {
     GamemodeStage instance = this;
     timer.scheduleAtFixedRate(new TimerTask() {
-      @Override
       public void run() {
-        if (endCondition() || (timeLimit != -1 && timeElapsed >= timeLimit)) {
-          plugin.getServer().getPluginManager().callEvent(new GamemodeStageEndEvent(instance));
-        }
-
-        timeElapsed++;
+        tick();
       }
     }, 0, 50);
   }
@@ -23,6 +19,15 @@ public class GamemodeStage {
   public void unload() {
     timer.cancel();
   }
+
+  public void tick() {
+    if (endCondition() || (timeLimit != -1 && timeElapsed >= timeLimit)) {
+      plugin.getServer().getPluginManager().callEvent(new GamemodeStageEndEvent(this));
+    }
+
+    timeElapsed++;
+  }
+
 
   public int timeLimit = -1;
 
