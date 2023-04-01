@@ -1,6 +1,7 @@
 package mccc.gamemode.hungergames;
 
 import mccc.core.Core;
+import mccc.gamemode.hungergames.commands.TestingCommands;
 import mccc.gamemode.hungergames.listeners.PlayerListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,6 +23,7 @@ public final class HungerGames extends JavaPlugin {
         saveDefaultConfig();
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+        getCommand("game").setExecutor(new TestingCommands(this));
     }
 
     @Override
