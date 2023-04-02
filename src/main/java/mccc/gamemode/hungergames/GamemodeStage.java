@@ -1,12 +1,9 @@
 package mccc.gamemode.hungergames;
 
 import mccc.gamemode.hungergames.events.GamemodeStageEndEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GamemodeStage {
 
