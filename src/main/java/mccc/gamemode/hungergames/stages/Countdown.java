@@ -6,6 +6,7 @@ import mccc.core.ApiManager;
 import mccc.core.api.PlayerManager;
 import mccc.gamemode.hungergames.GamemodeStage;
 import mccc.gamemode.hungergames.HungerGames;
+import net.kyori.adventure.audience.Audience;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 
@@ -17,11 +18,12 @@ public class Countdown extends GamemodeStage {
   @Override
   public void tick() {
     super.tick();
-    if ((timeLimit - timeElapsed) % 20 == 0) {
-      // the number updates at the start of each second
-      int updatedSecondsRemaining = (timeLimit - timeElapsed) / 20;
-      updateScreenCountdown(updatedSecondsRemaining);
-    }
+  }
+
+  @Override
+  public void tickSecond() {
+    super.tickSecond();
+    updateScreenCountdown(super.getSecondsLeft());
   }
 
   public void updateScreenCountdown(int secondsRemaining) {
@@ -48,6 +50,7 @@ public class Countdown extends GamemodeStage {
 
     String currentTitle = titleColor + "" + secondsRemaining;
 
+
     for (Player player : onlinePlayers) {
       // displaying the countdown on the screen
       TitleAPI.sendTitle(player, 7, 5, 7, currentTitle, "");
@@ -67,6 +70,11 @@ public class Countdown extends GamemodeStage {
     super.load();
     // TODO: player spawning
     plugin.core.apiManager.playerManager.setGlobalGamemode(GameMode.ADVENTURE);
+  }
+
+  @Override
+  public String getDisplayName() {
+    return "Обратный отсчёт";
   }
 
 

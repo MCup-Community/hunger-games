@@ -16,6 +16,8 @@ public class Fight extends GamemodeStage {
     super.load();
     // TODO: Chest loot randomization
 
+    super.initBossBarCountdown();
+
     plugin.core.apiManager.playerManager.setGlobalGamemode(GameMode.SURVIVAL);
     playIntro();
 
@@ -54,12 +56,19 @@ public class Fight extends GamemodeStage {
       if (alivePlayersCount > 0)
         aliveTeamsCount++;
 
-    return (aliveTeamsCount <= 1);
+    //return (aliveTeamsCount <= 1);
+    return false;  // for sake of testing
+  }
+
+  @Override
+  public String getDisplayName() {
+    return "Битва";
   }
 
   private LinkedHashMap<String, Integer> alivePlayers = new LinkedHashMap<>();
 
   public Fight(HungerGames plugin_) {
     super(plugin_);
+    super.timeLimit = 5 * 20 * 60;
   }
 }

@@ -23,8 +23,10 @@ public class PlayerListener implements Listener {
 
       Team playerTeam = plugin.core.apiManager.teamManager.getTeamByPlayer(player.getName());
 
-      if (playerTeam != null)
-        ((Fight)plugin.stageManager.getCurrentStage()).decrementAlivePlayers(playerTeam.name);
+      if (playerTeam == null)
+        return;
+
+      ((Fight)plugin.stageManager.getCurrentStage()).decrementAlivePlayers(playerTeam.name);
 
       Player killer = player.getKiller();
 
