@@ -6,11 +6,8 @@ import mccc.core.ApiManager;
 import mccc.core.api.PlayerManager;
 import mccc.gamemode.hungergames.GamemodeStage;
 import mccc.gamemode.hungergames.HungerGames;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
-import org.bukkit.Sound;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,7 +50,8 @@ public class Countdown extends GamemodeStage {
     for (Player player : onlinePlayers) {
       // displaying the countdown on the screen
       TitleAPI.sendTitle(player, 7, 5, 7, currentTitle, "");
-      player.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_PLACE, 1f, 1f);
+      // playing a note
+      player.playNote(player.getLocation(), Instrument.PIANO, new Note(24 - secondsRemaining * 2));
     }
   }
 
