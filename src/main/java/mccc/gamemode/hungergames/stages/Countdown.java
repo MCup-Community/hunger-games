@@ -17,23 +17,24 @@ public class Countdown extends GamemodeStage {
   @Override
   public void tick() {
     super.tick();
-    // the number updates at the start of each second
-    int updatedSecondsRemaining = (timeLimit - timeElapsed) / 20;
-    if ((timeLimit - timeElapsed) % 20 > 0) {
-      updatedSecondsRemaining++;
+    if ((timeLimit - timeElapsed) % 20 == 0) {
+      // the number updates at the start of each second
+      int updatedSecondsRemaining = (timeLimit - timeElapsed) / 20;
+      updateScreenCountdown(updatedSecondsRemaining);
     }
-
-    if (updatedSecondsRemaining != secondsRemaining && secondsRemaining > 0) {
-      secondsRemaining = updatedSecondsRemaining;
-      updateScreenCountdown();
-    }
-
   }
 
-  public void updateScreenCountdown() {
+  public void updateScreenCountdown(int secondsRemaining) {
     final Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
 
     // determining the color of the title based on how much time is left
+
+    if (secondsRemaining > 10 && secondsRemaining % 5 != 0)
+      return;
+
+    if (secondsRemaining == 0)
+      return;
+
     ChatColor titleColor;
     if (secondsRemaining > 5) {
       titleColor = ChatColor.YELLOW;
@@ -51,40 +52,27 @@ public class Countdown extends GamemodeStage {
       // displaying the countdown on the screen
       TitleAPI.sendTitle(player, 7, 5, 7, currentTitle, "");
       // playing a note
-      player.playNote(player.getLocation(), Instrument.PIANO, new Note(24 - secondsRemaining * 2));
+
+      int tone = 10 - secondsRemaining;
+
+      if (tone >= 0 && tone <= 24)
+        player.playNote(player.getLocation(), Instrument.PIANO, new Note(tone));
+      else
+        player.playSound(player, Sound.UI_BUTTON_CLICK, 1, 1);
     }
   }
 
   @Override
   public void load() {
     super.load();
-    System.out.println("FFUUUCK");
-    // insert player spawning
-    competitorsToAdventure();
+    // TODO: player spawning
+    plugin.core.apiManager.playerManager.setGlobalGamemode(GameMode.ADVENTURE);
   }
 
-  public int timeLimit = 200;
-
-  // The number displayed on screen
-  public int secondsRemaining = -1;
-
-  public void competitorsToAdventure() {
-    final ArrayList<mccc.core.local.data.Player> competitors = plugin.core.apiManager.playerManager.getPlayers();
-
-    // set every competitor to Adventure mode
-    for (mccc.core.local.data.Player competitor : competitors) {
-      String competitorName = competitor.nickname;
-      org.bukkit.entity.Player competitorObject = org.bukkit.Bukkit.getPlayer(competitorName);
-      if (competitorObject == null) {
-        plugin.getLogger().warning("Player " + competitorName + " is offline!");
-      } else{
-        competitorObject.setGameMode(GameMode.ADVENTURE);
-      }
-    }
-  }
 
 
   public Countdown(HungerGames plugin_) {
     super(plugin_);
+    super.timeLimit = 400;
   }
 }

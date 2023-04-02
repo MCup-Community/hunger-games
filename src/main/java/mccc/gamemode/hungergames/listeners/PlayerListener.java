@@ -34,7 +34,7 @@ public class PlayerListener implements Listener {
 
       int killScoreValue = plugin.getConfig().getInt("killScoreValue");
 
-      plugin.core.apiManager.scoreManager.addScore(killer.getName(), killScoreValue, "Kill");
+      plugin.core.apiManager.scoreManager.addScorePlayer(killer.getName(), killScoreValue, "Kill");
 
     }
 

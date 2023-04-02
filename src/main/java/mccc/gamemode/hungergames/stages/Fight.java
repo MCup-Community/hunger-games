@@ -17,14 +17,9 @@ public class Fight extends GamemodeStage {
     // TODO: Chest loot randomization
 
     plugin.core.apiManager.playerManager.setGlobalGamemode(GameMode.SURVIVAL);
+    playIntro();
 
     for (Player player : Bukkit.getOnlinePlayers()) {
-      // display the stage title and play the sound
-      String fightTitle = ChatColor.DARK_RED + "FIGHT STAGE STARTED";
-      TitleAPI.sendTitle(player, 7, 5, 7, fightTitle, "");
-      player.playSound(player.getLocation(), Sound.BLOCK_BELL_USE, 1.0f, 1.0f);
-      player.playSound(player.getLocation(), Sound.BLOCK_BELL_RESONATE, 1.0f, 1.0f);
-
       Team playerTeam = plugin.core.apiManager.teamManager.getTeamByPlayer(player.getName());
 
       if (playerTeam == null)
@@ -33,6 +28,16 @@ public class Fight extends GamemodeStage {
       alivePlayers.put(playerTeam.name, alivePlayers.getOrDefault(playerTeam.name, 0) + 1);
     }
   }
+
+  public void playIntro() {
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      // display the stage title and play the sound
+      String fightTitle = ChatColor.GOLD + "ДА НАЧНУТСЯ ГОЛОДНЫЕ ИГРЫ!";
+      TitleAPI.sendTitle(player, 30, 10, 10, fightTitle, "");
+      player.playSound(player.getLocation(), Sound.ENTITY_ELDER_GUARDIAN_CURSE, 3.0f, 0.8f);
+    }
+  }
+
 
   public void decrementAlivePlayers(String teamName) {
     if (!alivePlayers.containsKey(teamName))

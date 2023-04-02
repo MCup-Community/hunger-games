@@ -1,6 +1,7 @@
 package mccc.gamemode.hungergames;
 
 import mccc.gamemode.hungergames.events.GamemodeStageEndEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -30,7 +31,7 @@ public class GamemodeStage {
 
   public int timeLimit = -1;
 
-  public int timeElapsed = 0;
+  public int timeElapsed = -1;
 
   public BukkitTask tickTimer;
 
