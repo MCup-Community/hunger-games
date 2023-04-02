@@ -12,6 +12,8 @@ public class StageManager {
 
   public void startSequence() {
     currentStageIndex = 0;
+    fillSequence();
+
     stages.get(currentStageIndex).load();
   }
 
@@ -20,7 +22,33 @@ public class StageManager {
 
     currentStageIndex++;
 
-    stages.get(currentStageIndex).load();
+    if (currentStageIndex < stages.size())
+      stages.get(currentStageIndex).load();
+  }
+
+  public void switchToPreviousStage() {
+    stages.get(currentStageIndex).unload();
+
+    currentStageIndex--;
+
+    if (currentStageIndex >= 0)
+      stages.get(currentStageIndex).load();
+  }
+
+  public void terminateSequence() {
+    stages.get(currentStageIndex).unload();
+  }
+
+  public void restartSequence() {
+    terminateSequence();
+    startSequence();
+  }
+
+  public void fillSequence() {
+    stages.clear();
+
+    stages.add(new Countdown(plugin));
+    stages.add(new Fight(plugin));
   }
 
   public GamemodeStage getCurrentStage() {
@@ -30,9 +58,7 @@ public class StageManager {
 
   private final HungerGames plugin;
   public StageManager(HungerGames plugin_) {
+    fillSequence();
     plugin = plugin_;
-
-    stages.add(new Countdown(plugin));
-    stages.add(new Fight(plugin));
   }
 }

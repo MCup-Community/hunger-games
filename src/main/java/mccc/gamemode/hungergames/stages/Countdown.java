@@ -2,13 +2,14 @@ package mccc.gamemode.hungergames.stages;
 
 
 import com.connorlinfoot.titleapi.TitleAPI;
+import mccc.core.ApiManager;
+import mccc.core.api.PlayerManager;
 import mccc.gamemode.hungergames.GamemodeStage;
 import mccc.gamemode.hungergames.HungerGames;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
-import org.bukkit.Sound;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Countdown extends GamemodeStage {
@@ -16,39 +17,62 @@ public class Countdown extends GamemodeStage {
   @Override
   public void tick() {
     super.tick();
-    int updatedSecondsRemaining = (timeLimit - timeElapsed) / 20;
-
-    if (updatedSecondsRemaining != secondsRemaining) {
-      secondsRemaining = updatedSecondsRemaining;
-      updateScreenCountdown();
+    if ((timeLimit - timeElapsed) % 20 == 0) {
+      // the number updates at the start of each second
+      int updatedSecondsRemaining = (timeLimit - timeElapsed) / 20;
+      updateScreenCountdown(updatedSecondsRemaining);
     }
-
   }
 
-  public void updateScreenCountdown() {
+  public void updateScreenCountdown(int secondsRemaining) {
     final Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
 
-    String currentTitle = ChatColor.YELLOW + "" + secondsRemaining;
+    // determining the color of the title based on how much time is left
+
+    if (secondsRemaining > 10 && secondsRemaining % 5 != 0)
+      return;
+
+    if (secondsRemaining == 0)
+      return;
+
+    ChatColor titleColor;
+    if (secondsRemaining > 5) {
+      titleColor = ChatColor.YELLOW;
+    } else if (secondsRemaining > 3) {
+      titleColor = ChatColor.GOLD;
+    } else if (secondsRemaining > 1) {
+      titleColor = ChatColor.RED;
+    } else {
+      titleColor = ChatColor.DARK_RED;
+    }
+
+    String currentTitle = titleColor + "" + secondsRemaining;
 
     for (Player player : onlinePlayers) {
+      // displaying the countdown on the screen
       TitleAPI.sendTitle(player, 7, 5, 7, currentTitle, "");
-      player.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_PLACE, 1f, 1f);
+      // playing a note
+
+      int tone = 10 - secondsRemaining;
+
+      if (tone >= 0 && tone <= 24)
+        player.playNote(player.getLocation(), Instrument.PIANO, new Note(tone));
+      else
+        player.playSound(player, Sound.UI_BUTTON_CLICK, 1, 1);
     }
   }
 
   @Override
   public void load() {
     super.load();
-    System.out.println("FFUUUCK");
+    // TODO: player spawning
+    plugin.core.apiManager.playerManager.setGlobalGamemode(GameMode.ADVENTURE);
   }
 
-  public int timeLimit = 200;
-
-  // The number displayed on screen
-  public int secondsRemaining = -1;
 
 
   public Countdown(HungerGames plugin_) {
     super(plugin_);
+    super.timeLimit = 400;
   }
 }

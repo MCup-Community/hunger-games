@@ -1,3 +1,7 @@
 name: HungerGames
 version: '${project.version}'
 main: mccc.gamemode.hungergames.HungerGames
+api-version: 1.17
+commands:
+  game:
+    description: Hunger Gamed gamemode administration
