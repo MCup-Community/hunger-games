@@ -2,6 +2,7 @@ package mccc.gamemode.hungergames;
 
 import mccc.gamemode.hungergames.stages.Countdown;
 import mccc.gamemode.hungergames.stages.Fight;
+import mccc.gamemode.hungergames.stages.Cutscene;
 import mccc.gamemode.hungergames.stages.Waiting;
 
 import java.util.ArrayList;
@@ -14,6 +15,9 @@ public class StageManager {
   public void startSequence() {
     currentStageIndex = 0;
     fillSequence();
+
+    if (stages.size() == 0)
+      return;
 
     stages.get(currentStageIndex).load();
   }
@@ -52,11 +56,15 @@ public class StageManager {
     stages.clear();
 
     stages.add(new Waiting(plugin));
+    stages.add(new Cutscene(plugin));
     stages.add(new Countdown(plugin));
     stages.add(new Fight(plugin));
   }
 
   public GamemodeStage getCurrentStage() {
+    if (currentStageIndex >= stages.size())
+      return null;
+
     return stages.get(currentStageIndex);
   }
 

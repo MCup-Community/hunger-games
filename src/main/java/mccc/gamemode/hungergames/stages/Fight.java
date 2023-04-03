@@ -34,7 +34,7 @@ public class Fight extends GamemodeStage {
   public void playIntro() {
     for (Player player : Bukkit.getOnlinePlayers()) {
       // display the stage title and play the sound
-      String fightTitle = ChatColor.GOLD + "ДА НАЧНУТСЯ ГОЛОДНЫЕ ИГРЫ!";
+      String fightTitle = plugin.getConfig().getString("fightBeginTitle");
       TitleAPI.sendTitle(player, 30, 10, 10, fightTitle, "");
       player.playSound(player.getLocation(), Sound.ENTITY_ELDER_GUARDIAN_CURSE, 3.0f, 0.8f);
     }
