@@ -1,3 +1,8 @@
 killScoreValue: 100
 cutscenePrefix: "[§6§lГолодные Игры]§r "
 fightBeginTitle: "§6Да начнутся голодные игры!"
+border:
+  x: 0
+  y: 0
+  diameter: 60
+  shrunkDiameter: 10

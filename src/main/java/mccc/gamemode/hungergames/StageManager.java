@@ -1,9 +1,6 @@
 package mccc.gamemode.hungergames;
 
-import mccc.gamemode.hungergames.stages.Countdown;
-import mccc.gamemode.hungergames.stages.Fight;
-import mccc.gamemode.hungergames.stages.Cutscene;
-import mccc.gamemode.hungergames.stages.Waiting;
+import mccc.gamemode.hungergames.stages.*;
 
 import java.util.ArrayList;
 
@@ -58,7 +55,9 @@ public class StageManager {
     stages.add(new Waiting(plugin));
     stages.add(new Cutscene(plugin));
     stages.add(new Countdown(plugin));
-    stages.add(new Fight(plugin));
+    stages.add(new FightPreBorder(plugin));
+    stages.add(new FightShrinkBorder(plugin));
+    stages.add(new FightOvertime(plugin));
   }
 
   public GamemodeStage getCurrentStage() {

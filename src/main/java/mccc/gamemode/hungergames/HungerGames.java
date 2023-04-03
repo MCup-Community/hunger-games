@@ -15,6 +15,8 @@ public final class HungerGames extends JavaPlugin {
 
     public BukkitAudiences adventure;
 
+    public Storage storage;
+
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -24,12 +26,13 @@ public final class HungerGames extends JavaPlugin {
         core = (Core)Bukkit.getPluginManager().getPlugin("Core");
         adventure = BukkitAudiences.create(this);
 
+        storage = new Storage(this);
+
         saveDefaultConfig();
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
         getServer().getPluginManager().registerEvents(new GamemodeListener(this), this);
         getCommand("game").setExecutor(new TestingCommands(this));
-
 
         stageManager = new StageManager(this);
         stageManager.startSequence();

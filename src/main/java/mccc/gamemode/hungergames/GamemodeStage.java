@@ -41,7 +41,7 @@ public class GamemodeStage {
     if (bossBarEnabled) {
       if (timeLimit != -1)
         bossBarInstance.progress((float)getSecondsLeft() / (float)getSecondsTotal());
-      bossBarInstance.name(Component.text(getBossBarCountdownLabel()));
+      bossBarInstance.name(Component.text(getBossBarCountdownLabelPrefix()));
       bossBarAudience.showBossBar(bossBarInstance);
     }
   }
@@ -74,16 +74,17 @@ public class GamemodeStage {
   protected Audience bossBarAudience;
   protected BossBar bossBarInstance;
 
-  protected String bossBarCountdownLabel = "До конца фазы: ";
+  protected String bossBarCountdownLabelPrefix = "До конца фазы ";
+  protected String bossBarCountdownLabelSuffix = " секунд";
 
-  protected String getBossBarCountdownLabel() {
-    return bossBarCountdownLabel + getSecondsLeft();
+  protected String getBossBarCountdownLabelPrefix() {
+    return bossBarCountdownLabelPrefix + getSecondsLeft() + bossBarCountdownLabelSuffix;
   }
 
   protected void initBossBarCountdown() {
 
     bossBarAudience = plugin.adventure.players();
-    bossBarInstance = BossBar.bossBar(Component.text(getBossBarCountdownLabel()), 1, BossBar.Color.RED, BossBar.Overlay.NOTCHED_20);
+    bossBarInstance = BossBar.bossBar(Component.text(getBossBarCountdownLabelPrefix()), 1, BossBar.Color.RED, BossBar.Overlay.NOTCHED_20);
 
     bossBarAudience.showBossBar(bossBarInstance);
 

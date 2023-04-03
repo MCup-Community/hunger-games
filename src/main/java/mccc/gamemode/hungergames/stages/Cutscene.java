@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +44,8 @@ public class Cutscene extends GamemodeStage {
   public void unload() {
     super.unload();
 
+    task.cancel();
+
     for (Player player : initialPlayerLocations.keySet())
       player.teleport(initialPlayerLocations.get(player));
   }
@@ -61,12 +64,14 @@ public class Cutscene extends GamemodeStage {
       player.playSound(player, Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 3.0f);
     }
 
-    new BukkitRunnable() {
+    task = new BukkitRunnable() {
       public void run() {
         nextCutsceneStage();
       }
     }.runTaskLater(plugin, cutsceneStages.get(cutsceneStageIndex).tickDuration);
   }
+
+  private BukkitTask task;
 
   @Override
   public boolean endCondition() {
