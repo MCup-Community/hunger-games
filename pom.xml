@@ -86,5 +86,10 @@
             <artifactId>TitleAPI</artifactId>
             <version>1.8.1</version>
         </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-platform-bukkit</artifactId>
+            <version>4.3.0</version>
+        </dependency>
     </dependencies>
 </project>

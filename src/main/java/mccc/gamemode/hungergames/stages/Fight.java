@@ -1,6 +1,5 @@
 package mccc.gamemode.hungergames.stages;
 
-import com.connorlinfoot.titleapi.TitleAPI;
 import mccc.core.local.data.Team;
 import mccc.gamemode.hungergames.GamemodeStage;
 import mccc.gamemode.hungergames.HungerGames;
@@ -11,13 +10,8 @@ import java.util.LinkedHashMap;
 
 public class Fight extends GamemodeStage {
 
-  @Override
-  public void load() {
-    super.load();
-    // TODO: Chest loot randomization
-
+  public void initFight() {
     plugin.core.apiManager.playerManager.setGlobalGamemode(GameMode.SURVIVAL);
-    playIntro();
 
     for (Player player : Bukkit.getOnlinePlayers()) {
       Team playerTeam = plugin.core.apiManager.teamManager.getTeamByPlayer(player.getName());
@@ -25,41 +19,38 @@ public class Fight extends GamemodeStage {
       if (playerTeam == null)
         continue;
 
-      alivePlayers.put(playerTeam.name, alivePlayers.getOrDefault(playerTeam.name, 0) + 1);
-    }
-  }
-
-  public void playIntro() {
-    for (Player player : Bukkit.getOnlinePlayers()) {
-      // display the stage title and play the sound
-      String fightTitle = ChatColor.GOLD + "ДА НАЧНУТСЯ ГОЛОДНЫЕ ИГРЫ!";
-      TitleAPI.sendTitle(player, 30, 10, 10, fightTitle, "");
-      player.playSound(player.getLocation(), Sound.ENTITY_ELDER_GUARDIAN_CURSE, 3.0f, 0.8f);
+      plugin.storage.alivePlayers.put(playerTeam.name, plugin.storage.alivePlayers.getOrDefault(playerTeam.name, 0) + 1);
     }
   }
 
 
   public void decrementAlivePlayers(String teamName) {
-    if (!alivePlayers.containsKey(teamName))
+    if (!plugin.storage.alivePlayers.containsKey(teamName))
       return;
 
-    alivePlayers.put(teamName, alivePlayers.getOrDefault(teamName, 0) - 1);
+    plugin.storage.alivePlayers.put(teamName, plugin.storage.alivePlayers.getOrDefault(teamName, 0) - 1);
   }
 
   @Override
   public boolean endCondition() {
 
     int aliveTeamsCount = 0;
-    for (Integer alivePlayersCount : alivePlayers.values())
+    for (Integer alivePlayersCount : plugin.storage.alivePlayers.values())
       if (alivePlayersCount > 0)
         aliveTeamsCount++;
 
-    return (aliveTeamsCount <= 1);
+    //return (aliveTeamsCount <= 1);
+    return false;  // for sake of testing
   }
 
-  private LinkedHashMap<String, Integer> alivePlayers = new LinkedHashMap<>();
+  @Override
+  public String getDisplayName() {
+    return "Битва";
+  }
+
 
   public Fight(HungerGames plugin_) {
     super(plugin_);
+    super.timeLimit = 5 * 20 * 60;
   }
 }
