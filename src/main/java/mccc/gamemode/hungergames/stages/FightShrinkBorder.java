@@ -22,7 +22,7 @@ public class FightShrinkBorder extends Fight {
   public void showTitle() {
     for (Player player : Bukkit.getOnlinePlayers()) {
       String title = ChatColor.GOLD +  "Граница сужается!";
-      TitleAPI.sendTitle(player, 10, 30, 10, title);
+      TitleAPI.sendTitle(player, 10, 30, 10, title, "");
       player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 1.0f, 1.0f);
     }
   }
@@ -37,6 +37,6 @@ public class FightShrinkBorder extends Fight {
   public FightShrinkBorder(HungerGames plugin_) {
     super(plugin_);
     timeLimit = 1 * 60 * 20;
-    bossBarCountdownLabelPrefix = "До конца битвы ";
+    bossBarCountdownLabelPrefix = ChatColor.GOLD + "До конца битвы: ";
   }
 }

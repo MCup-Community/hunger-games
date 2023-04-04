@@ -4,6 +4,7 @@ import mccc.core.local.data.Player;
 import mccc.gamemode.hungergames.GamemodeStage;
 import mccc.gamemode.hungergames.HungerGames;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 
 public class Waiting extends GamemodeStage {
 
@@ -16,7 +17,8 @@ public class Waiting extends GamemodeStage {
   public void load() {
     super.load();
 
-    super.initBossBarCountdown();
+    initBossBarCountdown();
+    plugin.core.apiManager.playerManager.setGlobalGamemode(GameMode.ADVENTURE);
   }
 
   @Override

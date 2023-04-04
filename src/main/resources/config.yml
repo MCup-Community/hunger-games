@@ -1,8 +1,130 @@
 killScoreValue: 100
-cutscenePrefix: "[§6§lГолодные Игры]§r "
+winScoreValue: 750
+cageDiameter: 5
+cutscene:
+  '0':
+    location:
+      ==: org.bukkit.Location
+      world: world
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0
+    duration: 200
+    message: "Добро пожаловать в Голодные игры! В этой игре - убей или будешь убитым, так что приготовьтесь убивать. Если, конечно, не хотите проиграть. Если хотите, то можно и не убивать. Но придется умереть. Скорее всего."
+  '1':
+    location:
+      ==: org.bukkit.Location
+      world: world
+      x: 10.0
+      y: 200.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0
+    duration: 100
+    message: "Ваша команда получает баллы за убийство блаблаблалабалбубмлумлуб"
+cutscenePrefix: "[§6§lГолодные Игры§r] "
 fightBeginTitle: "§6Да начнутся голодные игры!"
 border:
-  x: 0
-  y: 0
-  diameter: 60
+  location:
+    ==: org.bukkit.Location
+    world: world
+    x: 0.0
+    y: 64.0
+    z: 0.0
+    pitch: 0.0
+    yaw: 0.0
+  diameter: 160
   shrunkDiameter: 10
+spawn:
+  '0':
+    location:
+      ==: org.bukkit.Location
+      world: world
+      x: 0.0
+      y: 64.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0
+  '1':
+    location:
+      ==: org.bukkit.Location
+      world: world
+      x: 10.0
+      y: 64.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0
+  '2':
+    location:
+      ==: org.bukkit.Location
+      world: world
+      x: 20.0
+      y: 64.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0
+  '3':
+    location:
+      ==: org.bukkit.Location
+      world: world
+      x: 30.0
+      y: 64.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0
+  '4':
+    location:
+      ==: org.bukkit.Location
+      world: world
+      x: 40.0
+      y: 64.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0
+  '5':
+    location:
+      ==: org.bukkit.Location
+      world: world
+      x: 50.0
+      y: 64.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0
+  '6':
+    location:
+      ==: org.bukkit.Location
+      world: world
+      x: 60.0
+      y: 64.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0
+  '7':
+    location:
+      ==: org.bukkit.Location
+      world: world
+      x: 70.0
+      y: 64.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0
+  '8':
+    location:
+      ==: org.bukkit.Location
+      world: world
+      x: 80.0
+      y: 64.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0
+  '9':
+    location:
+      ==: org.bukkit.Location
+      world: world
+      x: 90.0
+      y: 64.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0

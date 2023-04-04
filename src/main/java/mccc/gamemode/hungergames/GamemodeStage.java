@@ -22,7 +22,8 @@ public class GamemodeStage {
     if (bossBarEnabled)
       bossBarAudience.hideBossBar(bossBarInstance);
 
-    tickTimer.cancel();
+    if (tickTimer != null)
+      tickTimer.cancel();
   }
 
   public void tick() {
@@ -57,6 +58,20 @@ public class GamemodeStage {
     return (timeLimit - timeElapsed) / 20;
   }
 
+  public String getSecondsLeftFancy() {
+    int seconds = getSecondsLeft();
+    int minutes = seconds / 60;
+    seconds = seconds % 60;
+
+    String fancyText = minutes + ":";
+    if (seconds < 10)
+      fancyText = fancyText + "0";
+
+    fancyText = fancyText + seconds;
+
+    return fancyText;
+  }
+
   public int getSecondsElapsed() {
     return timeElapsed / 20;
   }
@@ -68,6 +83,11 @@ public class GamemodeStage {
   public boolean endCondition() {
     return false;
   }
+
+  public boolean skipCondition() {
+    return endCondition();
+  }
+
   protected final HungerGames plugin;
 
   protected boolean bossBarEnabled = false;
@@ -82,6 +102,9 @@ public class GamemodeStage {
   }
 
   protected void initBossBarCountdown() {
+
+    if (endCondition())
+      return;
 
     bossBarAudience = plugin.adventure.players();
     bossBarInstance = BossBar.bossBar(Component.text(getBossBarCountdownLabelPrefix()), 1, BossBar.Color.RED, BossBar.Overlay.NOTCHED_20);

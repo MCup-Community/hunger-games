@@ -19,12 +19,6 @@ public class FightOvertime extends Fight {
     initBorder();
   }
 
-  @Override
-  public void unload() {
-    WorldBorder worldBorder = Bukkit.getWorld("world").getWorldBorder();
-    worldBorder.setSize(1e9);
-    super.unload();
-  }
 
   public void initBorder() {
     WorldBorder worldBorder = Bukkit.getWorld("world").getWorldBorder();
@@ -36,7 +30,7 @@ public class FightOvertime extends Fight {
   public void showTitle() {
     for (Player player : Bukkit.getOnlinePlayers()) {
       String title = ChatColor.RED + "" + ChatColor.BOLD + "OVERTIME";
-      TitleAPI.sendTitle(player, 10, 30, 10, title);
+      TitleAPI.sendTitle(player, 10, 30, 10, title, "");
       player.playSound(player, Sound.ENTITY_WITHER_DEATH, 1.0f, 1.0f);
     }
   }

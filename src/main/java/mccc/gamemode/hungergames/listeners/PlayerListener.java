@@ -29,22 +29,21 @@ public class PlayerListener implements Listener {
       if (playerTeam == null)
         return;
 
-      ((Fight)plugin.stageManager.getCurrentStage()).decrementAlivePlayers(playerTeam.name);
       player.setGameMode(GameMode.SPECTATOR);
 
       Player killer = player.getKiller();
 
-      if (killer == null) {
+      if (killer == null)
         return;
-      }
+
 
       int killScoreValue = plugin.getConfig().getInt("killScoreValue");
 
       plugin.core.apiManager.scoreManager.addScorePlayer(killer.getName(), killScoreValue, "Kill");
 
     }
-
   }
+
 
   @EventHandler
   public void onPlayerMove(PlayerMoveEvent event) {
@@ -52,6 +51,7 @@ public class PlayerListener implements Listener {
       event.setCancelled(true);
     }
   }
+
   private final HungerGames plugin;
 
   public PlayerListener(HungerGames plugin_) {

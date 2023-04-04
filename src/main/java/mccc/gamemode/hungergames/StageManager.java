@@ -10,6 +10,9 @@ public class StageManager {
   public int currentStageIndex = 0;
 
   public void startSequence() {
+
+    plugin.storage = new Storage(plugin);
+
     currentStageIndex = 0;
     fillSequence();
 
@@ -23,6 +26,8 @@ public class StageManager {
     stages.get(currentStageIndex).unload();
 
     currentStageIndex++;
+    while (currentStageIndex < stages.size() && stages.get(currentStageIndex).skipCondition())
+      currentStageIndex++;
 
     if (currentStageIndex < stages.size())
       stages.get(currentStageIndex).load();
@@ -32,6 +37,8 @@ public class StageManager {
     stages.get(currentStageIndex).unload();
 
     currentStageIndex--;
+    while (currentStageIndex >= 0 && stages.get(currentStageIndex).skipCondition())
+      currentStageIndex--;
 
     if (currentStageIndex >= 0)
       stages.get(currentStageIndex).load();

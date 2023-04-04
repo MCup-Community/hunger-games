@@ -4,12 +4,13 @@ import mccc.gamemode.hungergames.HungerGames;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 public class TestingCommands implements CommandExecutor {
   @Override
-  public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
+  public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, String[] args) {
 
     if (args.length == 0) {
       // ...
@@ -35,6 +36,9 @@ public class TestingCommands implements CommandExecutor {
 
       if (Objects.equals(args[1], "prev"))
         plugin.stageManager.switchToPreviousStage();
+
+      if (Objects.equals(args[1], "current"))
+        commandSender.sendMessage(plugin.stageManager.getCurrentStage().toString());
     }
 
     return true;

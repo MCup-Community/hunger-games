@@ -4,38 +4,44 @@ import com.connorlinfoot.titleapi.TitleAPI;
 import mccc.core.local.data.Team;
 import mccc.gamemode.hungergames.GamemodeStage;
 import mccc.gamemode.hungergames.HungerGames;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
+
+import java.util.HashSet;
 
 public class Ending extends GamemodeStage {
 
   @Override
   public void load() {
     super.load();
+
+    WorldBorder worldBorder = Bukkit.getWorld("world").getWorldBorder();
+    worldBorder.setSize(1e9);
+
     displayFinalMessage();
     plugin.core.repository.write();
   }
 
   public void displayFinalMessage() {
+
     Team winnerTeam = null;
-    int aliveTeamsCount = 0;
+    HashSet<String> aliveTeams = new HashSet<>();
 
-    for (String teamName : plugin.storage.alivePlayers.keySet()) {
-      Team team = plugin.core.apiManager.teamManager.getTeam(teamName);
+    for (Player player : Bukkit.getOnlinePlayers()) {
 
-      if (team == null)
+      if (player.getGameMode() != GameMode.SURVIVAL)
         continue;
 
-      if (plugin.storage.alivePlayers.get(teamName) != 0) {
-        winnerTeam = team;
-        aliveTeamsCount++;
+      Team playerTeam = plugin.core.apiManager.teamManager.getTeamByPlayer(player.getName());
+
+      if (playerTeam != null) {
+        aliveTeams.add(playerTeam.name);
+        winnerTeam = playerTeam;
       }
     }
 
     String message, subMessage = "";
-    if (winnerTeam == null || aliveTeamsCount > 1) {
+    if (winnerTeam == null || aliveTeams.size() > 1) {
       message = ChatColor.GOLD + "Ничья?..";
       subMessage = "Победила дружба?";
     }
@@ -51,7 +57,7 @@ public class Ending extends GamemodeStage {
 
     for (Player player : Bukkit.getOnlinePlayers()) {
       TitleAPI.sendTitle(player, 10, 70, 10, message, subMessage);
-      player.playSound(player, Sound.UI_TOAST_CHALLENGE_COMPLETE, 2.0f, 1.0f);
+      player.playSound(player, Sound.UI_TOAST_CHALLENGE_COMPLETE, 2.0f, 0.7f);
     }
   }
 

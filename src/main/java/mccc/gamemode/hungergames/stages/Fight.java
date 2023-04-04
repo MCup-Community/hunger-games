@@ -6,42 +6,42 @@ import mccc.gamemode.hungergames.HungerGames;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 
-import java.util.LinkedHashMap;
+import java.util.HashSet;
 
 public class Fight extends GamemodeStage {
 
   public void initFight() {
     plugin.core.apiManager.playerManager.setGlobalGamemode(GameMode.SURVIVAL);
-
-    plugin.storage.alivePlayers.clear();
-    for (Player player : Bukkit.getOnlinePlayers()) {
-      Team playerTeam = plugin.core.apiManager.teamManager.getTeamByPlayer(player.getName());
-
-      if (playerTeam == null)
-        continue;
-
-      plugin.storage.alivePlayers.put(playerTeam.name, plugin.storage.alivePlayers.getOrDefault(playerTeam.name, 0) + 1);
-    }
   }
 
-
-  public void decrementAlivePlayers(String teamName) {
-    if (!plugin.storage.alivePlayers.containsKey(teamName))
-      return;
-
-    plugin.storage.alivePlayers.put(teamName, plugin.storage.alivePlayers.getOrDefault(teamName, 0) - 1);
+  @Override
+  public void unload() {
+    plugin.storage.fightEnd = true;
+    super.unload();
   }
 
   @Override
   public boolean endCondition() {
 
-    int aliveTeamsCount = 0;
-    for (Integer alivePlayersCount : plugin.storage.alivePlayers.values())
-      if (alivePlayersCount > 0)
-        aliveTeamsCount++;
+    HashSet<String> aliveTeams = new HashSet<>();
 
-    //return (aliveTeamsCount <= 1);
-    return false;  // for sake of testing
+    for (Player player : Bukkit.getOnlinePlayers()) {
+      if (player.getGameMode() != GameMode.SURVIVAL)
+        continue;
+
+      Team playerTeam = plugin.core.apiManager.teamManager.getTeamByPlayer(player.getName());
+
+      if (playerTeam != null)
+        aliveTeams.add(playerTeam.name);
+    }
+
+    return (aliveTeams.size() <= 1);
+//    return false;  // for sake of testing
+  }
+
+  @Override
+  public boolean skipCondition() {
+    return plugin.storage.fightEnd;
   }
 
   @Override
