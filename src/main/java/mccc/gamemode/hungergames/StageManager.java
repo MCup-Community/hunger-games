@@ -58,6 +58,7 @@ public class StageManager {
     stages.add(new FightPreBorder(plugin));
     stages.add(new FightShrinkBorder(plugin));
     stages.add(new FightOvertime(plugin));
+    stages.add(new Ending(plugin));
   }
 
   public GamemodeStage getCurrentStage() {

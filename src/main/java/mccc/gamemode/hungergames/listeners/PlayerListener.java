@@ -4,6 +4,7 @@ import mccc.core.local.data.Team;
 import mccc.gamemode.hungergames.HungerGames;
 import mccc.gamemode.hungergames.stages.Fight;
 import mccc.gamemode.hungergames.stages.Cutscene;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,6 +30,7 @@ public class PlayerListener implements Listener {
         return;
 
       ((Fight)plugin.stageManager.getCurrentStage()).decrementAlivePlayers(playerTeam.name);
+      player.setGameMode(GameMode.SPECTATOR);
 
       Player killer = player.getKiller();
 

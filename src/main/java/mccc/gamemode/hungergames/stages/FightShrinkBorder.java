@@ -14,7 +14,7 @@ public class FightShrinkBorder extends Fight {
   public void load() {
     super.load();
 
-    super.initBossBarCountdown();
+    initBossBarCountdown();
     showTitle();
     shrinkBorder();
   }

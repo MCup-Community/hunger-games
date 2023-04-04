@@ -14,7 +14,7 @@ public class FightOvertime extends Fight {
   public void load() {
     super.load();
 
-    super.initBossBarCountdown();
+    initBossBarCountdown();
     showTitle();
     initBorder();
   }

@@ -74,8 +74,8 @@ public class GamemodeStage {
   protected Audience bossBarAudience;
   protected BossBar bossBarInstance;
 
-  protected String bossBarCountdownLabelPrefix = "До конца фазы ";
-  protected String bossBarCountdownLabelSuffix = " секунд";
+  protected String bossBarCountdownLabelPrefix = "До конца фазы: ";
+  protected String bossBarCountdownLabelSuffix = "";
 
   protected String getBossBarCountdownLabelPrefix() {
     return bossBarCountdownLabelPrefix + getSecondsLeft() + bossBarCountdownLabelSuffix;

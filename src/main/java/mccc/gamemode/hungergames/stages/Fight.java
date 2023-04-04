@@ -13,6 +13,7 @@ public class Fight extends GamemodeStage {
   public void initFight() {
     plugin.core.apiManager.playerManager.setGlobalGamemode(GameMode.SURVIVAL);
 
+    plugin.storage.alivePlayers.clear();
     for (Player player : Bukkit.getOnlinePlayers()) {
       Team playerTeam = plugin.core.apiManager.teamManager.getTeamByPlayer(player.getName());
 
