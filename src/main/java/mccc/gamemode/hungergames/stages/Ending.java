@@ -1,15 +1,18 @@
 package mccc.gamemode.hungergames.stages;
 
 import com.connorlinfoot.titleapi.TitleAPI;
+import mccc.core.Core;
 import mccc.core.local.data.Team;
-import mccc.gamemode.hungergames.GamemodeStage;
+import mccc.core.stages.GamemodeStage;
 import mccc.gamemode.hungergames.HungerGames;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashSet;
 
 public class Ending extends GamemodeStage {
+
 
   @Override
   public void load() {
@@ -19,7 +22,7 @@ public class Ending extends GamemodeStage {
     worldBorder.setSize(1e9);
 
     displayFinalMessage();
-    plugin.core.repository.write();
+    core.repository.write();
   }
 
   public void displayFinalMessage() {
@@ -32,7 +35,7 @@ public class Ending extends GamemodeStage {
       if (player.getGameMode() != GameMode.SURVIVAL)
         continue;
 
-      Team playerTeam = plugin.core.apiManager.teamManager.getTeamByPlayer(player.getName());
+      Team playerTeam = core.apiManager.teamManager.getTeamByPlayer(player.getName());
 
       if (playerTeam != null) {
         aliveTeams.add(playerTeam.name);
@@ -52,7 +55,7 @@ public class Ending extends GamemodeStage {
           ChatColor.RESET + " побеждают!";
 
       int scoreAmount = plugin.getConfig().getInt("winScoreValue");
-      plugin.core.apiManager.scoreManager.addScoreTeam(winnerTeam.name, scoreAmount, "Грандиозная победа в Голодных играх");
+      core.apiManager.scoreManager.addScoreTeam(winnerTeam.name, scoreAmount, "Грандиозная победа в Голодных играх");
     }
 
     for (Player player : Bukkit.getOnlinePlayers()) {
@@ -61,7 +64,8 @@ public class Ending extends GamemodeStage {
     }
   }
 
-  public Ending(HungerGames plugin_) {
-    super(plugin_);
+  public Ending(Core core_, JavaPlugin plugin_) {
+    super(core_, plugin_);
   }
+
 }

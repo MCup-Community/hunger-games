@@ -1,20 +1,20 @@
 package mccc.gamemode.hungergames;
 
 import mccc.core.Core;
-import mccc.gamemode.hungergames.commands.TestingCommands;
-import mccc.gamemode.hungergames.listeners.GamemodeListener;
+import mccc.core.StageManager;
+import mccc.core.stages.Cutscene;
+import mccc.core.stages.Waiting;
 import mccc.gamemode.hungergames.listeners.PlayerListener;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import mccc.gamemode.hungergames.stages.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public final class HungerGames extends JavaPlugin {
 
     public Core core;
-    public StageManager stageManager;
-
-    public BukkitAudiences adventure;
-
     public Storage storage;
 
     @Override
@@ -24,27 +24,33 @@ public final class HungerGames extends JavaPlugin {
 
         // Core API initialization
         core = (Core)Bukkit.getPluginManager().getPlugin("Core");
-        adventure = BukkitAudiences.create(this);
+
+        if (core == null)
+            this.getLogger().warning("This plugin require Core API plugin to function!");
+
+        core.registerStageManager(
+          new StageManager(core, this, new ArrayList<>(Arrays.asList(
+            Waiting.class,
+            Cutscene.class,
+            Countdown.class,
+            FightPreBorder.class,
+            FightShrinkBorder.class,
+            FightOvertime.class,
+            Ending.class
+          )))
+        );
 
         storage = new Storage(this);
 
         saveDefaultConfig();
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
-        getServer().getPluginManager().registerEvents(new GamemodeListener(this), this);
-        getCommand("game").setExecutor(new TestingCommands(this));
 
-        stageManager = new StageManager(this);
-        stageManager.startSequence();
+        core.stageManager.startSequence();
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-
-        if (adventure != null) {
-            adventure.close();
-            adventure = null;
-        }
     }
 }

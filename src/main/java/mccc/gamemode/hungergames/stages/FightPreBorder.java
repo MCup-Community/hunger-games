@@ -1,14 +1,16 @@
 package mccc.gamemode.hungergames.stages;
 
 import com.connorlinfoot.titleapi.TitleAPI;
+import mccc.core.Core;
 import mccc.gamemode.hungergames.HungerGames;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class FightPreBorder extends Fight{
+public class FightPreBorder extends Fight {
 
   @Override
   public void load() {
@@ -40,8 +42,8 @@ public class FightPreBorder extends Fight{
   }
 
 
-  public FightPreBorder(HungerGames plugin_) {
-    super(plugin_);
+  public FightPreBorder(Core core_, JavaPlugin plugin_) {
+    super(core_, plugin_);
     bossBarCountdownLabelPrefix = "Сужение границы через: ";
     timeLimit = 2 * 60 * 20;
   }

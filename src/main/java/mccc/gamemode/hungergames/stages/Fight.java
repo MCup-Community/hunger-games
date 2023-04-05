@@ -1,22 +1,23 @@
 package mccc.gamemode.hungergames.stages;
 
+import mccc.core.Core;
 import mccc.core.local.data.Team;
-import mccc.gamemode.hungergames.GamemodeStage;
+import mccc.core.stages.GamemodeStage;
 import mccc.gamemode.hungergames.HungerGames;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashSet;
 
 public class Fight extends GamemodeStage {
 
   public void initFight() {
-    plugin.core.apiManager.playerManager.setGlobalGamemode(GameMode.SURVIVAL);
+    core.apiManager.playerManager.setGlobalGamemode(GameMode.SURVIVAL);
   }
 
   @Override
   public void unload() {
-    plugin.storage.fightEnd = true;
     super.unload();
   }
 
@@ -29,11 +30,15 @@ public class Fight extends GamemodeStage {
       if (player.getGameMode() != GameMode.SURVIVAL)
         continue;
 
-      Team playerTeam = plugin.core.apiManager.teamManager.getTeamByPlayer(player.getName());
+      Team playerTeam = core.apiManager.teamManager.getTeamByPlayer(player.getName());
 
       if (playerTeam != null)
         aliveTeams.add(playerTeam.name);
     }
+
+    if (aliveTeams.size() <= 1)
+      plugin.storage.fightEnd = true;
+
 
     return (aliveTeams.size() <= 1);
 //    return false;  // for sake of testing
@@ -49,9 +54,12 @@ public class Fight extends GamemodeStage {
     return "Битва";
   }
 
+  protected HungerGames plugin;
 
-  public Fight(HungerGames plugin_) {
-    super(plugin_);
+
+  public Fight(Core core_, JavaPlugin plugin_) {
+    super(core_, plugin_);
+    plugin = (HungerGames)plugin_;
     super.timeLimit = 5 * 20 * 60;
   }
 }

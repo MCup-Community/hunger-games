@@ -1,12 +1,14 @@
 package mccc.gamemode.hungergames.stages;
 
 import com.connorlinfoot.titleapi.TitleAPI;
+import mccc.core.Core;
 import mccc.gamemode.hungergames.HungerGames;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class FightShrinkBorder extends Fight {
 
@@ -34,8 +36,8 @@ public class FightShrinkBorder extends Fight {
     worldBorder.setSize(worldBorderShrunkD, getSecondsTotal());
   }
 
-  public FightShrinkBorder(HungerGames plugin_) {
-    super(plugin_);
+  public FightShrinkBorder(Core core_, JavaPlugin plugin_) {
+    super(core_, plugin_);
     timeLimit = 1 * 60 * 20;
     bossBarCountdownLabelPrefix = ChatColor.GOLD + "До конца битвы: ";
   }

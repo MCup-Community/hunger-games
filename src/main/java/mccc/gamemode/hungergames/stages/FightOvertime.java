@@ -1,12 +1,14 @@
 package mccc.gamemode.hungergames.stages;
 
 import com.connorlinfoot.titleapi.TitleAPI;
+import mccc.core.Core;
 import mccc.gamemode.hungergames.HungerGames;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class FightOvertime extends Fight {
 
@@ -47,8 +49,11 @@ public class FightOvertime extends Fight {
     return title;
   }
 
-  public FightOvertime(HungerGames plugin_) {
-    super(plugin_);
+  protected HungerGames plugin;
+
+  public FightOvertime(Core core_, JavaPlugin plugin_) {
+    super(core_, plugin_);
+    plugin = (HungerGames) plugin_;
     timeLimit = 1 * 60 * 20;
   }
 }
