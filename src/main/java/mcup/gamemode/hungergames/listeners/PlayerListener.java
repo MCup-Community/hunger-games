@@ -1,8 +1,8 @@
-package mccc.gamemode.hungergames.listeners;
+package mcup.gamemode.hungergames.listeners;
 
-import mccc.core.local.data.Team;
-import mccc.gamemode.hungergames.HungerGames;
-import mccc.gamemode.hungergames.stages.Fight;
+import mcup.core.local.data.Team;
+import mcup.gamemode.hungergames.HungerGames;
+import mcup.gamemode.hungergames.stages.Fight;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

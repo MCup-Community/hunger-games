@@ -1,11 +1,11 @@
-package mccc.gamemode.hungergames;
+package mcup.gamemode.hungergames;
 
-import mccc.core.Core;
-import mccc.core.StageManager;
-import mccc.core.stages.Cutscene;
-import mccc.core.stages.Waiting;
-import mccc.gamemode.hungergames.listeners.PlayerListener;
-import mccc.gamemode.hungergames.stages.*;
+import mcup.core.Core;
+import mcup.core.StageManager;
+import mcup.core.stages.Cutscene;
+import mcup.core.stages.Waiting;
+import mcup.gamemode.hungergames.listeners.PlayerListener;
+import mcup.gamemode.hungergames.stages.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 

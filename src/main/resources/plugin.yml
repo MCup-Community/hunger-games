@@ -1,5 +1,5 @@
 name: HungerGames
 version: '${project.version}'
-main: mccc.gamemode.hungergames.HungerGames
+main: mcup.gamemode.hungergames.HungerGames
 api-version: 1.17
 depend: [ Core ]

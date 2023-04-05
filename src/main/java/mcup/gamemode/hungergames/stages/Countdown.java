@@ -1,15 +1,15 @@
-package mccc.gamemode.hungergames.stages;
+package mcup.gamemode.hungergames.stages;
 
-import mccc.core.Core;
-import mccc.core.local.data.Team;
-import mccc.gamemode.hungergames.HungerGames;
+import mcup.core.Core;
+import mcup.core.local.data.Team;
+import mcup.gamemode.hungergames.HungerGames;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Countdown extends mccc.core.stages.Countdown {
+public class Countdown extends mcup.core.stages.Countdown {
 
   @Override
   public void load() {
@@ -56,7 +56,7 @@ public class Countdown extends mccc.core.stages.Countdown {
 
         Location playerLocation = teamLocation.clone().add(offsetX, 0, offsetZ);
 
-        mccc.core.local.data.Player teamPlayer = team.players.get(i);
+        mcup.core.local.data.Player teamPlayer = team.players.get(i);
         Player bukkitPlayer = Bukkit.getPlayer(teamPlayer.nickname);
 
         if (bukkitPlayer == null)

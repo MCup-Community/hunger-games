@@ -1,5 +1,6 @@
-package mccc.gamemode.hungergames;
+package mcup.gamemode.hungergames;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import java.util.*;
 
@@ -8,6 +9,13 @@ public class Storage {
   public ArrayList<Location> spawnLocations = new ArrayList<>();
 
   public boolean fightEnd = false;
+
+  public void resetStorage() {
+    spawnLocations.clear();
+    fightEnd = false;
+
+    Bukkit.broadcastMessage("FUUUUCK");
+  }
 
   public void getSpawnLocations() {
     spawnLocations.clear();

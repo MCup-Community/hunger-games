@@ -1,10 +1,9 @@
-package mccc.gamemode.hungergames.stages;
+package mcup.gamemode.hungergames.stages;
 
 import com.connorlinfoot.titleapi.TitleAPI;
-import mccc.core.Core;
-import mccc.core.local.data.Team;
-import mccc.core.stages.GamemodeStage;
-import mccc.gamemode.hungergames.HungerGames;
+import mcup.core.Core;
+import mcup.core.local.data.Team;
+import mcup.core.stages.GamemodeStage;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;

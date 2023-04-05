@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>mccc.gamemode</groupId>
-    <artifactId>HungerGames</artifactId>
+    <groupId>mcup.gamemode</groupId>
+    <artifactId>hunger-games</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
@@ -75,11 +75,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>mccc.core</groupId>
+            <groupId>mcup.core</groupId>
             <artifactId>Core</artifactId>
-            <version>0.1</version>
+            <version>0.2</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/mccc_core.jar</systemPath>
+            <systemPath>${project.basedir}/src/main/resources/mcup-core.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.github.ConnorLinfoot</groupId>

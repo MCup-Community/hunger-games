@@ -1,8 +1,8 @@
-package mccc.gamemode.hungergames.stages;
+package mcup.gamemode.hungergames.stages;
 
 import com.connorlinfoot.titleapi.TitleAPI;
-import mccc.core.Core;
-import mccc.gamemode.hungergames.HungerGames;
+import mcup.core.Core;
+import mcup.gamemode.hungergames.HungerGames;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
