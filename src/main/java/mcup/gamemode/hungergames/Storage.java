@@ -13,8 +13,6 @@ public class Storage {
   public void resetStorage() {
     spawnLocations.clear();
     fightEnd = false;
-
-    Bukkit.broadcastMessage("FUUUUCK");
   }
 
   public void getSpawnLocations() {
