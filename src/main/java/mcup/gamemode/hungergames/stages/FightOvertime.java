@@ -38,7 +38,7 @@ public class FightOvertime extends Fight {
   }
 
   @Override
-  protected String getBossBarCountdownLabelPrefix() {
+  protected String getBossBarCountdownLabel() {
     String title = ChatColor.BOLD + "OVERTIME";
 
     if (getSecondsElapsed() % 2 == 0)
