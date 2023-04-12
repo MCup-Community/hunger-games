@@ -16,6 +16,7 @@ public class Countdown extends mcup.core.stages.Countdown {
     super.load();
     plugin.storage.getSpawnLocations();
     buildCage(Material.BARRIER);
+    core.apiManager.playerManager.clearPlayersInventory();
     spawnPlayers();
   }
 
