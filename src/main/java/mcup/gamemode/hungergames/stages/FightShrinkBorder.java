@@ -1,12 +1,13 @@
-package mccc.gamemode.hungergames.stages;
+package mcup.gamemode.hungergames.stages;
 
 import com.connorlinfoot.titleapi.TitleAPI;
-import mccc.gamemode.hungergames.HungerGames;
+import mcup.core.Core;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class FightShrinkBorder extends Fight {
 
@@ -14,7 +15,7 @@ public class FightShrinkBorder extends Fight {
   public void load() {
     super.load();
 
-    super.initBossBarCountdown();
+    initBossBarCountdown();
     showTitle();
     shrinkBorder();
   }
@@ -22,7 +23,7 @@ public class FightShrinkBorder extends Fight {
   public void showTitle() {
     for (Player player : Bukkit.getOnlinePlayers()) {
       String title = ChatColor.GOLD +  "Граница сужается!";
-      TitleAPI.sendTitle(player, 10, 30, 10, title);
+      TitleAPI.sendTitle(player, 10, 30, 10, title, "");
       player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 1.0f, 1.0f);
     }
   }
@@ -34,9 +35,9 @@ public class FightShrinkBorder extends Fight {
     worldBorder.setSize(worldBorderShrunkD, getSecondsTotal());
   }
 
-  public FightShrinkBorder(HungerGames plugin_) {
-    super(plugin_);
+  public FightShrinkBorder(Core core_, JavaPlugin plugin_) {
+    super(core_, plugin_);
     timeLimit = 1 * 60 * 20;
-    bossBarCountdownLabelPrefix = "До конца битвы ";
+    bossBarCountdownLabelPrefix = ChatColor.GOLD + "До конца битвы: ";
   }
 }

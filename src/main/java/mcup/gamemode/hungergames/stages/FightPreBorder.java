@@ -1,21 +1,23 @@
-package mccc.gamemode.hungergames.stages;
+package mcup.gamemode.hungergames.stages;
 
 import com.connorlinfoot.titleapi.TitleAPI;
-import mccc.gamemode.hungergames.HungerGames;
+import mcup.core.Core;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class FightPreBorder extends Fight{
+public class FightPreBorder extends Fight {
 
   @Override
   public void load() {
+    initFight();
     super.load();
 
     // TODO: Chest loot randomization
-    super.initBossBarCountdown();
-    initFight();
+    initBossBarCountdown();
     initBorder();
     playIntro();
   }
@@ -24,11 +26,10 @@ public class FightPreBorder extends Fight{
   public void initBorder() {
     WorldBorder worldBorder = Bukkit.getWorld("world").getWorldBorder();
 
-    int worldBorderX = plugin.getConfig().getInt("border.x");
-    int worldBorderY = plugin.getConfig().getInt("border.y");
+    Location worldBorderLocation = plugin.getConfig().getLocation("border.location");
     int worldBorderD = plugin.getConfig().getInt("border.diameter");
 
-    worldBorder.setCenter(worldBorderX, worldBorderY);
+    worldBorder.setCenter(worldBorderLocation);
     worldBorder.setSize(worldBorderD);
   }
   public void playIntro() {
@@ -40,9 +41,9 @@ public class FightPreBorder extends Fight{
   }
 
 
-  public FightPreBorder(HungerGames plugin_) {
-    super(plugin_);
-    bossBarCountdownLabelPrefix = "Сужение границы через ";
+  public FightPreBorder(Core core_, JavaPlugin plugin_) {
+    super(core_, plugin_);
+    bossBarCountdownLabelPrefix = "Сужение границы через: ";
     timeLimit = 2 * 60 * 20;
   }
 }
